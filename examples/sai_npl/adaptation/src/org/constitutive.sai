@@ -7,7 +7,7 @@ status_functions:
 
 events: b(V).
 
-states: vl(V), extra(V).
+states: oblUnfulfilled(O), vl(V), extra(V), sanct(V).
 
 
 
@@ -18,3 +18,7 @@ constitutive_rules:
 1: nticks(clock,V) count-as  vl(5000) while V>=5000. /*any value exceeding 5000 count-as 5000 (to not activate multiple norms)*/
 
 2: nticks(clock,V) count-as extra(2) while V>=5000.
+
+3: count-as sanct(1) while oblUnfulfilled(O).
+
+4: count-as sanct(0) .

@@ -15,6 +15,7 @@
 +!setup_sai: focusing(ArtSai,inst_test_art,_,_,inst_test,_) & focusing(NplArt,nb1,_,_,_,_) <-
    getSaiEngine(SE)[artifact_id(ArtSai)];
    setInstitution(SE)[artifact_id(NplArt)];
+   .print("connected: ", ArtSai, NplArt);
   .
 
 +!setup_sai<-
@@ -29,7 +30,8 @@
 .      
 
 
-+oblUnfulfilled(O) <- .print("Unfulfilled ",O).
++oblUnfulfilled(O) <-
+    .print("Unfulfilled ",O).
 
 +sanction(NormId,Event,Ag,Sanction) <- .print("Sanction ",Sanction," for ",Ag," created from norm ", NormId, " that is ",Event).
 
