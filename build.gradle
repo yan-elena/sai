@@ -11,7 +11,7 @@ group   'org.jacamo'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(23)
     }
 }
 
@@ -19,6 +19,7 @@ repositories {
     mavenCentral()
 
     maven { url "https://raw.githubusercontent.com/jacamo-lang/mvn-repo/master" }
+    maven { url "https://raw.githubusercontent.com/yan-elena/npl-mvn-repo/main" } // experiment with npl(a)
     maven { url 'https://repo.gradle.org/gradle/libs-releases' }
 
 }
@@ -27,8 +28,10 @@ dependencies{
    antlr "org.antlr:antlr4:4.12.0" // use ANTLR version 4
    implementation group: 'org.jason'      , name: 'jason'   , version: '3.1' , changing: true	, transitive: false
    implementation group: 'org.jacamo'     , name: 'moise'   , version: '1.1', changing: true, transitive: false
-   implementation group: 'org.jacamo',     name: 'npl' ,     version: '0.6', changing: false, transitive: false
-   implementation group: 'org.jacamo'     , name: 'cartago' , version: '3.1' , changing: true, transitive: false
+//   implementation group: 'org.jacamo',     name: 'npl' ,     version: '0.6', changing: false, transitive: false
+//   implementation group: 'org.jacamo',     name: 'npl' ,     version: '0.8', changing: false, transitive: false // experiment with npl(a)
+    implementation('org.jacamo:npl:0.8')
+    implementation group: 'org.jacamo'     , name: 'cartago' , version: '3.1' , changing: true, transitive: false
    implementation group: 'org.jacamo'     , name: 'jaca'    , version: '3.1' , changing: true, transitive: false
    
    // https://mvnrepository.com/artifact/javax.json/javax.json-api
@@ -39,7 +42,7 @@ dependencies{
 }
 
 jar {
-    baseName 'sai'
+    archiveBaseName = 'sai'
 }
 
 
@@ -60,14 +63,14 @@ if (JavaVersion.current().isJava8Compatible()) {
 }
 
 task javadocJar (type: Jar, dependsOn: javadoc) {
-    baseName 'sai'
-    classifier = 'javadoc'
+    archiveBaseName =  'sai'
+    archiveClassifier = 'javadoc'
     from '${docsDir}/../../doc/api'
 }
 
 task sourceJar (type : Jar) {
-    baseName 'sai'
-    classifier = 'sources'
+    archiveBaseName = 'sai'
+    archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
 
